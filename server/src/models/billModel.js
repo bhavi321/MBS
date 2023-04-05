@@ -22,4 +22,4 @@ const billSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-module.exports = mongoose.model("bill", orderSchema)
+module.exports = mongoose.model("bill", billSchema)

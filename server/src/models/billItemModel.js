@@ -3,11 +3,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 
 const billItemSchema = new mongoose.Schema(
     {
-        customerName: {
-            type: String,
-            required: true,
-            unique: true
-        },
+        
         billId: {
             type: ObjectId,
             ref: "bill"
@@ -20,7 +16,7 @@ const billItemSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
-        price:{
+        unitPrice:{
             type: Number,
             required: true
         }
@@ -28,4 +24,4 @@ const billItemSchema = new mongoose.Schema(
     { timestamps: true }
 )
 
-module.exports = mongoose.model("billItem", billItemSchema)
+module.exports = mongoose.model("billItem", billItemSchema) 

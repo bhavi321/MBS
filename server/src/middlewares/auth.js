@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const authentication = async function(req,res,next){
 
-    let token = req.headers["Authorization"]
+    let token = req.headers["x-auth-token"]
     
     if(!token) return res.status(400).send({status:false,message:"token is required"})
 

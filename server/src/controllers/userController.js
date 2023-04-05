@@ -1,29 +1,48 @@
-const userModel = require("../models/userModel")
-const jwt = require("jsonwebtoken")
+const userModel = require("../models/userModel");
+const jwt = require("jsonwebtoken");
+const { userJoi } = require("../middlewares/joiValidation");
 
-const register = async function(req,res){
+const register = async function (req, res) {
+  const body = req.body;
 
-    let body = req.body
-    if (!body || Object.keys(body).length == 0)return res.status(400).send({ status: false, message: "Enter data in body." })
-    
-    let created = await userModel.create(body)
+  if (!body || Object.keys(body).length == 0)
+    return res.status(400).json({ message: "Enter data in body." });
 
-    res.status(201).send({status:true,message:"success",data:created})
-}
+  if (body.email) body.email = body.email.trim();
+  if (body.userName) body.userName = body.userName.trim();
+  const user = await userModel.findOne({ email: body.email });
+  if (user) return res.status(400).json({ message: "email already present" });
+  const { error, value } = userJoi.validate(body, { abortEarly: false });
+  if (error) return res.status(400).send({ error });
 
+  let created = await userModel.create(body);
 
-const login = async function(req,res){
-    
-    const {email,password} = req.body
+  console.log(value);
 
-    if(!email) return res.status(400).send({status:false,message:"email is required"})
-    let check = await userModel.findOne({email : email})
-    if(!check) return res.status(404).send({status : false, message: "email is not found"})
+  res.status(201).json({ message: "success", data: created });
+};
 
-    if(!password) return res.status(400).send({status:false,message:"password is required"})
+const login = async function (req, res) {
+  const { email, password } = req.body;
 
-    let token = jwt.sign({userId:check._id},"dummykey",{expiresIn:"4h"})
-    return res.status(200).send({status:true,message:"User login successful",data:token})
+  if (!email)
+    return res
+      .status(400)
+      .send({ status: false, message: "email is required" });
+  let check = await userModel.findOne({ email: email });
+  if (!check)
+    return res
+      .status(404)
+      .send({ status: false, message: "email is not found" });
 
-}
-module.exports = {register,login}
+  if (!password)
+    return res
+      .status(400)
+      .send({ status: false, message: "password is required" });
+
+  let token = jwt.sign({ userId: check._id }, "dummykey", { expiresIn: "4h" });
+  return res
+    .status(200)
+    .send({ status: true, message: "User login successful", data: token });
+};
+module.exports = { register, login };

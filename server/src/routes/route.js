@@ -8,6 +8,6 @@ const {authentication} = require("../middlewares/auth")
 router.post("/register", register)
 router.post("/login", login)
 router.post("/products",authentication,createProduct)
-router.get("/products",getProducts)
+router.get("/products",authentication,getProducts)
 
 module.exports = router

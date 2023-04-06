@@ -17,6 +17,9 @@ const billSchema = new mongoose.Schema(
             required: true,
             unique: true
 
+        },
+        totalPrice:{
+            type:Number
         }
     },
     { timestamps: true }

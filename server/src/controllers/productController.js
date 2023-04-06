@@ -1,41 +1,86 @@
-const productModel = require("../models/productModel")
-const userModel = require("../models/userModel")
+const productModel = require("../models/productModel");
+const userModel = require("../models/userModel");
+const { productJoi,productUpdateJoi } = require("../middlewares/joiValidation");
 
 const createProduct = async function (req, res) {
+  let body = req.body;
 
-    let body = req.body
+  if (body.productName) body.productName = body.productName.trim();
+
+  const { error, value } = productJoi.validate(body, { abortEarly: false });
+  if (error) return res.status(400).json({ error });
+
+  let user = await userModel.findOne({ _id: req.decodedToken.userId,isDeleted:false });
+
+  if (!user)
+    return res
+      .status(404)
+      .send({ status: false, message: "user does not exist with this id" });
+
+  req.body.userId = user._id;
+  let created = await productModel.create(body);
+
+  return res
+    .status(201)
+    .send({ status: true, message: "success", data: created });
+};
 
 
-
-    let checkUser = await userModel.findOne({ _id: req.decodedToken.userId })
-    if (!checkUser) return res.status(404).send({ status: false, message: "user does not exist with this id" })
-
-    //Authorization
-    //if (req.decodedToken.userId != checkUser._id)return res.status(403).send({status: false,message: "You are not authorized."});
-    req.body.userId = checkUser._id
-    let created = await productModel.create(body)
-
-    return res.status(201).send({ status: true, message: "success", data: created })
-}
-
-
-
+//----------------------------------
 
 const getProducts = async function (req, res) {
-    let body = req.body
+  let body = req.body;
 
-    let userData = await userModel.findOne({ _id: req.decodedToken.userId })
-    if (!userData) return res.status(404).send({ status: false, message: "user does not exist with this id" })
+  const userData = await userModel.findOne({ _id: req.decodedToken.userId, isDeleted:false });
+  if (!userData)
+    return res
+      .status(404)
+      .json({ status: false, message: "user does not exist with this id" });
 
-    if (userData.type == "ADMIN") {
-        let productData = await productModel.find()
-        return res.status(200).send({ status: true, message: "success", data: productData })
-    }
-    else {
-        let productData = await productModel.find({userId:req.decodedToken.userId})
-        return res.status(200).send({ status: true, message: "success", data: productData })
+  if (userData.type == "ADMIN") {
+    const productData = await productModel.find({isdeleted:false});
+    return res
+      .status(200)
+      .json({ status: true, message: "success", data: productData });
+  } else {
+    const productData = await productModel.find({
+      userId: req.decodedToken.userId,
+      isDeleted:false
+    });
+    return res
+      .status(200)
+      .json({ message: "success", data: productData });
+  }
+};
 
-    }
+
+const updateProducts = async function(req,res){
+
+  const body = req.body
+  const productId = req.params.productId
+
+  const {error,value} = productUpdateJoi.validate(body,{abortEarly:false})
+  if(error) return res.status(400).json({error})
+
+  const product = await productModel.findOne({_id:productId})
+  if(!product) return res.status(404).json({message:"product does not exist with this id"})
+
+  
+
+  const user = await userModel.findOne({_id:req.decodedToken.userId,isDeleted:false})
+
+
+
+ 
+
+
+  if(user.type=="ADMIN"){
+  const update = await productModel.findOneAndUpdate({_id:productId},{...body},{new:true})
+  return res.status(200).json({message:"updated",data:update})
+  }
+  else{
+    
+  }
+
 }
-
-module.exports = { createProduct, getProducts }
+module.exports = { createProduct, getProducts, updateProducts };

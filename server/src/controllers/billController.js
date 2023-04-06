@@ -12,18 +12,21 @@ const createBill = async function (req, res) {
       .send({ status: false, message: "Enter data in body." });
 
   const { customerName, phone, items } = req.body;
-  const billObj = {};
-
+  let billObj = {};
+  const resultObj = {};
   billObj.userId = req.decodedToken.userId;
   billObj.customerName = customerName;
   billObj.phone = phone;
 
-  const create = await billModel.create(billObj);
-
+ 
+  
+  const billItems = [];
   //items = [{pid,q},{pid,q}]
   const billItemObj = {};
-  billItemObj.billId = create._id;
+  billItemObj.billId = billObj._id;
 
+  //[]
+  let totalPrice = 0;
   for (let i = 0; i < items.length; i++) {
     const productId = items[i]["productId"];
     const quantity = items[i]["quantity"];
@@ -31,9 +34,16 @@ const createBill = async function (req, res) {
     billItemObj.productId = productId;
     billItemObj.quantity = quantity;
     billItemObj.unitPrice = quantity * product.price;
-    const createBillItem = await billItemModel.create(billItemObj);
+    totalPrice += quantity * product.price;
+    const currItem = await billItemModel.create(billItemObj);
+
+    billItems.push(currItem);
   }
-  return res.status(201).json({ message: "success" });
+  billObj.totalPrice = totalPrice;
+  resultObj.bill = billObj;
+  await billModel.create(billObj);
+  resultObj.items = billItems;
+  return res.status(201).json({ message: "success", data: resultObj });
   //console.log(create);
 };
 

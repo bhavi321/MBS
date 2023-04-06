@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken")
 const authentication = async function(req,res,next){
 
-    let token = req.headers["x-auth-token"]
+    let bearerToken = req.header("Authorization")
     
-    if(!token) return res.status(400).send({status:false,message:"token is required"})
+    if(!bearerToken) return res.status(400).send({status:false,message:"bearer token is required"})
+    token = bearerToken.replace("Bearer ","")
+
 
     jwt.verify(token,"dummykey",(err,decodedToken)=>{
         if(err)

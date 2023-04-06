@@ -1,6 +1,7 @@
-const userModel = require("../models/userModel");
+const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const userModel = require("../models/userModel");
 
 const { userJoi, loginJoi } = require("../middlewares/joiValidation");
 
@@ -64,8 +65,24 @@ const login = async function (req, res) {
 const getUserById = async function(req,res){
 
   const userId = req.params.userId
+
+  if (!mongoose.isValidObjectId(userId)) return res.status(400).json({message: "Invalid User Id" })
   
+
+  const user = await userModel.findOne({_id:req.decodedToken.userId,isDeleted:false})
+  if(!user) return res.status(400).json({message:"no user found"})
   
+  if(user.type == "ADMIN"){
+    const result = await userModel.findOne({_id:userId,isDeleted:false})
+    return res.status(200).json({message:"success",data:result})
+  }
+  else if(user.type == "VENDOR"){
+    if(user._id != userId)
+    return res.status(400).json({message:"you are not authorized"})
+
+    return res.status(400).json({message:"success",data:user})
+
+  }
 }
 
 module.exports = { register, login, getUserById };

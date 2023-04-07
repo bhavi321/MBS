@@ -3,7 +3,7 @@ const router = express.Router()
 
 const {register,login, getUserById} = require("../controllers/userController")
 const {createProduct,getProducts,updateProducts} = require("../controllers/productController")
-const {createBill} = require("../controllers/billController")
+const {createBill,getBillByVendorId,getBillByBillId, getBillItemsByBillId} = require("../controllers/billController")
 const {authentication} = require("../middlewares/auth")
 
 router.post("/register", register)
@@ -17,7 +17,12 @@ router.put("/products/:productId",authentication,updateProducts)
 //delete
 
 router.post("/bill",authentication,createBill)
-//get bill by vendor
+router.get("/bill/vendor/:userId",authentication,getBillByVendorId)
+router.get("/bill/:billId",authentication,getBillByBillId)
+
+router.get("/billItem/:billId",authentication,getBillItemsByBillId)
+
+//get bill by vendor params?
 //by bill id
 //getbillitemsby bill id
 //delete

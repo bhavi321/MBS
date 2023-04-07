@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema(
   {
     productName: {
       type: String,
-      required: true
+      required: true,
     },
     unit: {
       type: String,
@@ -16,10 +16,10 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     userId: {
-      type: ObjectId, 
-      ref: "user",  
+      type: ObjectId,
+      ref: "user",
     },
-    isDeleted: { 
+    isDeleted: {
       type: Boolean,
       default: false,
     },

@@ -6,16 +6,17 @@ const userJoi = Joi.object({
   password: Joi.string()
     .min(8)
     .required()
-    .regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/).message("Password must include min 8 letters and at least: 1 special character,1 number. "),
+    .regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
+    .message(
+      "Password must include min 8 letters and at least: 1 special character,1 number. "
+    ),
   type: Joi.string().required().valid("ADMIN", "VENDOR"),
 });
 
-
 const loginJoi = Joi.object({
-    email:Joi.string().trim().required(),
-    password: Joi.string().trim().required(),
-  })
-
+  email: Joi.string().trim().required(),
+  password: Joi.string().trim().required(),
+});
 
 const productJoi = Joi.object({
   productName: Joi.string().required(),
@@ -29,4 +30,26 @@ const productUpdateJoi = Joi.object({
   price: Joi.number(),
 });
 
-module.exports = { userJoi, productJoi, productUpdateJoi, loginJoi };
+const createBillValidation = Joi.object({
+  customerName: Joi.string().required(),
+  phone: Joi.string()
+    .min(0)
+    .required()
+    .regex(/^[6-9][0-9]{9}$/),
+  items: Joi.array()
+    .items(
+      Joi.object({
+        productId: Joi.string().required(),
+        quantity: Joi.number().required(),
+      })
+    )
+    .required(),
+});
+
+module.exports = {
+  userJoi,
+  productJoi,
+  productUpdateJoi,
+  loginJoi,
+  createBillValidation,
+};

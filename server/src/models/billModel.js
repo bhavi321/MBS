@@ -1,28 +1,23 @@
-const mongoose = require("mongoose")
-const ObjectId = mongoose.Schema.Types.ObjectId
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const billSchema = new mongoose.Schema(
-    {
-        customerName: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        userId: {
-            type: ObjectId,
-            ref: "user"
-        },
-        phone: {
-            type: Number,
-            required: true,
-            unique: true
-
-        },
-        totalPrice:{
-            type:Number
-        }
+  {
+    customerName: {
+      type: String,
     },
-    { timestamps: true }
-)
+    userId: {
+      type: ObjectId,
+      ref: "user",
+    },
+    phone: {
+      type: String,
+    },
+    totalPrice: {
+      type: Number,
+    },
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model("bill", billSchema)
+module.exports = mongoose.model("bill", billSchema);

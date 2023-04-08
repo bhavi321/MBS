@@ -17,14 +17,17 @@ const Homepage = function () {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(details);
+    
+
   }
+
 
   return (
     <div>
       <h1>Welcome to Homepage</h1>
 
       <div>
-        <form>
+        <form >
           <section>
             <label htmlFor="email">Email Id :</label>
             <input
@@ -38,7 +41,7 @@ const Homepage = function () {
           <br />
           <section>
             <label html for="password">
-              password:
+              Password:
             </label>
             <input
               type="password"
@@ -55,7 +58,7 @@ const Homepage = function () {
         </form>
       </div>
 
-      <h2>Don't have an account</h2>
+      <h2>Don't have an account?</h2>
       <NavLink to="/register">Sign Up</NavLink>
     </div>
   );

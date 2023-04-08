@@ -2,11 +2,15 @@ import React from "react"
 import './App.css';
 import {createBrowserRouter,RouterProvider} from "react-router-dom"
 import Homepage from "./components/Homepage/Homepage";
-
+import Register from "./components/Register/Register";
 
 const router = createBrowserRouter([
   {path: "/",
-  element: <Homepage/>}
+  element: <Homepage/>},
+  {
+    path: "/register",
+    element: <Register/>
+  }
 
 ])
 

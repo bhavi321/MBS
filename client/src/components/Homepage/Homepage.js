@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { NavLink,Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const Homepage = function () {
   const [details, setDetails] = useState({
@@ -13,11 +14,22 @@ const Homepage = function () {
       console.log(prev);
       return { ...prev, [name]: value };
     });
+
   }
-  function handleSubmit(e) {
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(details);
     
+          const res = await axios.post("http://localhost:3001/login", details);
+      
+          // localStorage.setItem("currentUser", JSON.stringify(res.data));
+          window.alert("Login Success")
+          console.log(res.data.data)
+          //navigate("/post")
+    
+      
+    
+
 
   }
 

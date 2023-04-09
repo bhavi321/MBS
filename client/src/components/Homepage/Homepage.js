@@ -20,7 +20,7 @@ const Homepage = function () {
   async function handleSubmit(e) {
     e.preventDefault();
     
-          const res = await axios.post("http://localhost:3001/login", details);
+          const res = await axios.post("http://localhost:3001/login", details,{withCredentials:true});
       
           // localStorage.setItem("currentUser", JSON.stringify(res.data));
           window.alert("Login Success")

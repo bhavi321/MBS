@@ -12,7 +12,7 @@ function User(){
     const params = useParams()
 
 useEffect(()=>{
-    axios.get(`http://localhost:3001/user/${params}`,{withCredentials:true}).then((response)=>{
+    axios.get(`http://localhost:3001/user/${params}`).then((response)=>{
     console.log(response.data.data)
    })
 },[])

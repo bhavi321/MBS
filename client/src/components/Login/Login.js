@@ -1,13 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import "./Homepage.css";
-const Homepage = function () {
+import "./Login.css";
+const Login = function () {
   const [error, setError] = useState("");
   const [details, setDetails] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate()
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -28,6 +29,8 @@ const Homepage = function () {
         setError("");
         localStorage.setItem("auth-token", `Bearer ${token}`);
         console.log(localStorage.getItem("auth-token"))
+       
+        navigate("/homepage")
       })
       .catch((error) => {
         setError(error.response.data.message);
@@ -82,4 +85,4 @@ const Homepage = function () {
   );
 };
 
-export default Homepage;
+export default Login;

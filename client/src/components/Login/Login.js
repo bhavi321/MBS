@@ -30,7 +30,7 @@ const Login = function () {
         localStorage.setItem("auth-token", `Bearer ${token}`);
         console.log(localStorage.getItem("auth-token"))
        
-        navigate("/homepage")
+        navigate("/products")
       })
       .catch((error) => {
         setError(error.response.data.message);
@@ -42,7 +42,7 @@ const Login = function () {
 
   return (
     <div>
-      <h1 className="heading">Welcome to Homepage</h1>
+      <h1 className="heading">Login Here</h1>
 
       <div>
       {error && <p className="alert alert-danger">{error}</p>}

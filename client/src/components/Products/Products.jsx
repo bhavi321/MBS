@@ -25,7 +25,7 @@ function Products(){
         e.preventDefault()
         console.log(details)
         console.log(localStorage.getItem("auth-token"))
-       axios.post("http://localhost:3001/products",details,{
+       axios.post("http://localhost:3001/productss",details,{
         headers:{
             Authorization: localStorage.getItem("auth-token")
         }

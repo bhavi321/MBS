@@ -50,12 +50,30 @@ export default function Headers() {
                   Users
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/products"}>
-                  Products
-                </Link>
-              </li>
 
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Products
+                </a>
+              <ul className="dropdown-menu">
+                  <li>
+                    <Link className="dropdown-item" to={"/productss"}>
+                      Create Product{" "}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to={"/products"}>
+                      Fetch Products
+                    </Link>
+                  </li>
+                </ul>
+                </li>
               <li className="nav-item">
                 <Link className="nav-link" to={"/login"}>
                   Login

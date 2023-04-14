@@ -41,12 +41,12 @@ function Products() {
     <Fragment>
       <div className="">
         <div className="container col-lg-3 col-5 shadow p-4 rounded">
-          <h1 className="text-white">CREATE PRODUCT</h1>
-          <hr className="text-white" />
+          <h1 className="">CREATE PRODUCT</h1>
+          <hr className="" />
           {error && <p className="alert alert-danger">{error}</p>}
           <form>
             <div className="form-group mt-3 mt-4">
-              <label htmlFor="productName" className="form-label text-white ">
+              <label htmlFor="productName" className="form-label ">
                 Product Name
               </label>
               <input
@@ -58,7 +58,7 @@ function Products() {
               />
             </div>
             <div className="form-group mt-3">
-              <label htmlFor="unit" className="form-label text-white ">
+              <label htmlFor="unit" className="form-label">
                 Unit
               </label>
               <input
@@ -70,7 +70,7 @@ function Products() {
               />
             </div>
             <div className="form-group mt-3">
-              <label htmlFor="price" className="form-label text-white ">
+              <label htmlFor="price" className="form-label ">
                 Price
               </label>
               <input

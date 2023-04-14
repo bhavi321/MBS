@@ -8,6 +8,7 @@ import Bill from "./components/Bill/Bill";
 import FetchBill from "./components/Bill/FetchBill";
 import BillItemsByBillId from "./components/Bill/BillItemsByBillId";
 import Products from "./components/Products/Products";
+import FetchProducts from "./components/Products/FetchProducts";
 import Homepage from "./components/Homepage/Homepage";
 import Headers from "./components/Headers/Headers";
 
@@ -71,6 +72,15 @@ function App() {
               <AR>
                 {" "}
                 <Products />
+              </AR>
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <AR>
+                {" "}
+                <FetchProducts />
               </AR>
             }
           />

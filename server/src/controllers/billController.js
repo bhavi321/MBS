@@ -14,6 +14,15 @@ const createBill = async function (req, res) {
       .status(400)
       .send({ status: false, message: "Enter data in body." });
 
+      if(req.body.items){
+       
+        if(req.body.items.length==0){
+        return res
+      .status(400)
+      .send({ status: false, message: "Choose Items" });
+        }
+      }
+
   const { customerName, phone, items } = req.body;
 
   const { error } = createBillValidation.validate(req.body, {
@@ -79,6 +88,24 @@ const createBill = async function (req, res) {
 
   return res.status(201).json({ message: "success", data: resultObj });
 };
+
+
+const getBills = async function (req, res) {
+  
+
+  const bills = await billModel.find({ userId: req.decodedToken.userId, isDeleted: false });
+  if (!bills)
+    return res
+      .status(404)
+      .json({ status: false, message: "this user's bill does not exist" });
+
+  
+
+    
+    return res.status(200).json({ message: "success", data: bills });
+  
+};
+
 
 const getBillByVendorId = async function (req, res) {
   let userId = req.params.userId;
@@ -187,6 +214,7 @@ const getBillItemsByBillId = async function (req, res) {
 };
 module.exports = {
   createBill,
+  getBills,
   getBillByVendorId,
   getBillByBillId,
   getBillItemsByBillId,

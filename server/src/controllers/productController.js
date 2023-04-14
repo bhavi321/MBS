@@ -18,20 +18,27 @@ const createProduct = async function (req, res) {
     _id: req.decodedToken.userId,
     isDeleted: false,
   });
-
+ 
   if (!user)
     return res
       .status(404)
-      .send({ status: false, message: "user does not exist with this id" });
+      .send({ message: "user does not exist with this id" });
+      
+      const product = await productModel.findOne({productName:body.productName,isDeleted:false})
+      if (product)
+    return res
+      .status(400)
+      .send({ message: "product already exist with this name" });
+
 
   req.body.userId = user._id;
   let created = await productModel.create(body);
 
   return res
-    .status(201)
-    .send({ status: true, message: "success", data: created });
+    .status(201) 
+    .send({ message: "success", data: created });
 };
-
+ 
 //----------------------------------
 
 const getProducts = async function (req, res) {
@@ -50,7 +57,7 @@ const getProducts = async function (req, res) {
     const productData = await productModel.find({ isdeleted: false });
     return res
       .status(200)
-      .json({ status: true, message: "success", data: productData });
+      .json({message: "success", data: productData });
   } else {
     const productData = await productModel.find({
       userId: req.decodedToken.userId,

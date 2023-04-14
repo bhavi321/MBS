@@ -20,9 +20,10 @@ function FetchBill() {
   }, []);
   return (
     <div>
+       <div className="row">
       {bills.map((x) => {
         return (
-          <div className="row">
+         
             <div
               className="card mx-auto col-lg-4 col-sm-10 mt-3 col-md-5 shadow"
               style={{ width: "18rem" }}
@@ -42,9 +43,10 @@ function FetchBill() {
                 </button>
               </div>
             </div>
-          </div>
+          
         );
       })}
+      </div>
     </div>
   );
 }

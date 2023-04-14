@@ -1,4 +1,4 @@
-import { NavLink,useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import "./Login.css";
@@ -8,7 +8,7 @@ const Login = function () {
     email: "",
     password: "",
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -25,34 +25,32 @@ const Login = function () {
       .post("http://localhost:3001/login", details)
       .then((res) => {
         const token = res.data.data;
-        console.log(token)
+        console.log(token);
         setError("");
         localStorage.setItem("auth-token", `Bearer ${token}`);
-        console.log(localStorage.getItem("auth-token"))
-       
-        navigate("/products")
+        console.log(localStorage.getItem("auth-token"));
+
+        navigate("/bill");
       })
       .catch((error) => {
         setError(error.response.data.message);
       });
-
-   
-
   }
 
   return (
-    <div>
-      <h1 className="heading">Login Here</h1>
+    <div className="position-absolute col-lg-4 top-0 start-50 border border-3 shadow shadow-3 mt-5">
+      <h1 className="heading ms-5">Login Here</h1>
 
       <div>
-      {error && <p className="alert alert-danger">{error}</p>}
+        {error && <p className="alert alert-danger">{error}</p>}
         <form>
           <section>
-            <label htmlFor="email" className="email">
+            <label htmlFor="email" className="form-label ms-3">
               Email Id :
             </label>
             <input
               id="email"
+              className="mt-4 ms-3 form-control w-75 p-3"
               type="email"
               placeholder="Enter email"
               name="email"
@@ -61,26 +59,29 @@ const Login = function () {
           </section>
           <br />
           <section>
-            <label html for="password" className="password">
+            <label html for="password" className="form-label ms-3">
               Password:
             </label>
             <input
               type="password"
               id="password"
+              className="mt-4 ms-3 form-control w-75 p-3"
               placeholder="Enter password"
               name="password"
               onChange={handleChange}
             ></input>
           </section>
 
-          <button type="submit" onClick={handleSubmit}>
+          <button type="submit" className="mt-4 ms-5" onClick={handleSubmit}>
             SUBMIT
           </button>
         </form>
       </div>
 
-      <h2 className="f">Don't have an account?</h2>
-      <NavLink to="/register">Sign Up</NavLink>
+      <h2 className="mt-5 ms-3">Don't have an account?</h2>
+      <NavLink to="/register" className="ms-5">
+        Sign Up
+      </NavLink>
     </div>
   );
 };

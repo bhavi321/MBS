@@ -27,7 +27,7 @@ const productJoi = Joi.object({
 const productUpdateJoi = Joi.object({
   productName: Joi.string(),
   unit: Joi.number().min(0),
-  price: Joi.number(),
+  price: Joi.number().min(0),
 });
 
 const createBillValidation = Joi.object({

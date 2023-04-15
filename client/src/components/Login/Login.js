@@ -23,7 +23,7 @@ const Login = function () {
     e.preventDefault();
 
     api
-      .post("/login", details)
+      .post("/api/login", details)
       .then((res) => {
         const token = res.data.data;
         console.log(token);

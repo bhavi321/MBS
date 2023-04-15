@@ -37,7 +37,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/homepage" element={<Homepage />} />
           <Route
-            path="/user/"
+            path="/user"
             element={
               <AR>
                 <User />

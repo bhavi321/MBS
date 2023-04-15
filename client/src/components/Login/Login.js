@@ -21,8 +21,8 @@ const Login = function () {
   function handleSubmit(e) {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:3001/login", details)
+    api
+      .post("/login", details)
       .then((res) => {
         const token = res.data.data;
         console.log(token);
@@ -33,6 +33,7 @@ const Login = function () {
         navigate("/bill");
       })
       .catch((error) => {
+        console.log(error)
         setError(error.response.data.message);
       });
   }

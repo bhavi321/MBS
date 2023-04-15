@@ -25,7 +25,7 @@ function UpdateProducts() {
     e.preventDefault();
  
     axios
-      .put(`http://localhost:3001/products/${params.id}`, details, {
+      .put(`/products/${params.id}`, details, {
         headers: {
           Authorization: localStorage.getItem("auth-token"),
         },

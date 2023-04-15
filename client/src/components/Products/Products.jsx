@@ -24,7 +24,7 @@ function Products() {
     console.log(details);
     console.log(localStorage.getItem("auth-token"));
     axios
-      .post("http://localhost:3001/productss", details, {
+      .post("/productss", details, {
         headers: {
           Authorization: localStorage.getItem("auth-token"),
         },

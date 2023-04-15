@@ -8,7 +8,7 @@ function FetchProducts() {
  const navigate = useNavigate()
   useEffect(() => {
     axios
-      .get("http://localhost:3001/products", {
+      .get("/products", {
         headers: {
           Authorization: localStorage.getItem("auth-token"),
         },

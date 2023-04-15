@@ -6,8 +6,8 @@ export default function BillItemsByBillId() {
   const params = useParams();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/billItem/${params.id}`, {
+    api
+      .get(`billItem/${params.id}`, {
         headers: {
           Authorization: localStorage.getItem("auth-token"),
         },

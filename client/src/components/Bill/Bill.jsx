@@ -14,8 +14,8 @@ function Bill() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/products/`, {
+    api
+      .get(`products/`, {
         headers: { Authorization: localStorage.getItem("auth-token") },
       })
       .then((response) => {
@@ -32,9 +32,9 @@ function Bill() {
   }
   function handleSubmit() {
     console.log(items);
-    axios
+    api
       .post(
-        "http://localhost:3001/bill/",
+        "bill/",
         { customerName, phone, items },
         {
           headers: {

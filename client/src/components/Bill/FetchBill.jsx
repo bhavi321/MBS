@@ -7,7 +7,7 @@ function FetchBill() {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:3001/bill/getBills", {
+      .get("getBills", {
         headers: {
           Authorization: localStorage.getItem("auth-token"),
         },

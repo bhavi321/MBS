@@ -8,7 +8,7 @@ function FetchBill() {
   const navigate = useNavigate();
   useEffect(() => {
     api
-      .get("getBills", {
+      .get("/bill/getBills", {
         headers: {
           Authorization: localStorage.getItem("auth-token"),
         },

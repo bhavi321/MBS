@@ -24,17 +24,17 @@ export default function BillItemsByBillId() {
         return (
           <div
             className="card mx-auto col-lg-4 col-sm-10 mt-3 col-md-5 shadow "
-            style={{ width: "18rem" }}
+            style={{ width: "20rem" }}
           >
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
-                <strong>billId</strong>:{x.productId}
+                <strong>Item Id</strong>:{x.productId}
               </li>
               <li className="list-group-item">
-                <strong>quantity</strong>:{x.quantity}
+                <strong>Quantity</strong>:{x.quantity}
               </li>
               <li className="list-group-item">
-                <strong>unitPrice</strong>:{x.unitPrice}
+                <strong>Unit Price</strong>:{x.unitPrice}
               </li>
             </ul>
           </div>

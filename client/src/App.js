@@ -9,6 +9,7 @@ import FetchBill from "./components/Bill/FetchBill";
 import BillItemsByBillId from "./components/Bill/BillItemsByBillId";
 import Products from "./components/Products/Products";
 import FetchProducts from "./components/Products/FetchProducts";
+import UpdateProducts from "./components/Products/UpdateProducts";
 import Homepage from "./components/Homepage/Homepage";
 import Headers from "./components/Headers/Headers";
 
@@ -81,6 +82,16 @@ function App() {
               <AR>
                 {" "}
                 <FetchProducts />
+              </AR>
+            }
+          />
+        
+          <Route
+            path="/products/update/:id"
+            element={
+              <AR>
+                {" "}
+                <UpdateProducts />
               </AR>
             }
           />

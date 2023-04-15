@@ -1,14 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
 export default function Headers() {
+ 
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            My Invoice
-          </a>
+          <div>
+        <a className="navbar-brand" href="">
+      <img src="https://images.cdn3.stockunlimited.net/clipart450/bill_1242837.jpg" alt="Logo" width="38" height="39" className="d-inline-block align-text-center "/>
+      My Invoice
+    </a>
+    </div>
+          
           <button
             className="navbar-toggler"
             type="button"
@@ -22,7 +27,9 @@ export default function Headers() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item dropdown">
+              {localStorage.getItem("auth-token")?(
+              <Fragment>
+                <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
@@ -72,8 +79,10 @@ export default function Headers() {
                       Fetch Products
                     </Link>
                   </li>
+
                 </ul>
-                </li>
+                </li> </Fragment>):<span></span>}
+              
               <li className="nav-item">
                 <Link className="nav-link" to={"/login"}>
                   Login
@@ -84,8 +93,11 @@ export default function Headers() {
                   Register
                 </Link>
               </li>
+              
             </ul>
+
           </div>
+          <Link className="me-5 nav-link" to={"/login"} onClick={()=>localStorage.clear()}>Logout</Link>
         </div>
       </nav>
     </div>

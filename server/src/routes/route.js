@@ -22,23 +22,24 @@ const {
 } = require("../controllers/billController");
 const { authentication } = require("../middlewares/auth");
 
-router.post("/register", register);
-router.post("/login", login);
-router.get("/user", authentication, getUsers);
-router.get("/user/:userId", authentication, getUserById);
+router.post("/api/register", register);
+router.post("/api/login", login);
+
+router.get("/api/user", authentication, getUsers);
+router.get("/api/user/:userId", authentication, getUserById);
 //get vendor by vendor id params
 
-router.post("/productss",authentication, createProduct);
-router.get("/products", authentication, getProducts);
-router.put("/products/:productId", authentication, updateProducts);
+router.post("/api/productss",authentication, createProduct);
+router.get("/api/products", authentication, getProducts);
+router.put("/api/products/:productId", authentication, updateProducts);
 //delete 
 
-router.post("/bill", authentication, createBill);
-router.get("/bill/getBills", authentication, getBills);
-router.get("/bill/vendor/:userId", authentication, getBillByVendorId); 
-router.get("/bill/:billId", authentication, getBillByBillId);
+router.post("/api/bill", authentication, createBill);
+router.get("/api/bill/getBills", authentication, getBills);
+router.get("/api/bill/vendor/:userId", authentication, getBillByVendorId); 
+router.get("/api/bill/:billId", authentication, getBillByBillId);
 
-router.get("/billItem/:billId", authentication, getBillItemsByBillId);
+router.get("/api/billItem/:billId", authentication, getBillItemsByBillId);
 
 //get bill by vendor params?
 //by bill id

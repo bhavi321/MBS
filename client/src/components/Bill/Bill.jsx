@@ -2,6 +2,7 @@ import { React, useEffect } from "react";
 //import './User.css'
 import { useState } from "react";
 import axios from "axios";
+import { api } from "../../App";
 
 function Bill() {
   const [products, setProducts] = useState([]);
@@ -15,7 +16,7 @@ function Bill() {
 
   useEffect(() => {
     api
-      .get(`products/`, {
+      .get(`/products`, {
         headers: { Authorization: localStorage.getItem("auth-token") },
       })
       .then((response) => {

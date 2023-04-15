@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { api } from "../../App";
 
 function FetchProducts() {
   const [products, setProducts] = useState([]);
   const [updatedProduct,setUpdatedProduct] = useState({})
  const navigate = useNavigate()
   useEffect(() => {
-    axios
+    api
       .get("/products", {
         headers: {
           Authorization: localStorage.getItem("auth-token"),

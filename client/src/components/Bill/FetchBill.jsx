@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { api } from "../../App";
 
 function FetchBill() {
   const [bills, setBills] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios
+    api
       .get("getBills", {
         headers: {
           Authorization: localStorage.getItem("auth-token"),

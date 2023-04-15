@@ -2,6 +2,8 @@ import { Fragment, React } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { api } from "../../App";
+
 function UpdateProducts() {
   const [error, setError] = useState("");
   const [updatedProduct,setUpdatedProduct] = useState({})
@@ -24,7 +26,7 @@ function UpdateProducts() {
   function handleSubmit(e) {
     e.preventDefault();
  
-    axios
+    api
       .put(`/products/${params.id}`, details, {
         headers: {
           Authorization: localStorage.getItem("auth-token"),

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Fragment, React, useEffect } from "react";
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -21,6 +22,9 @@ function AR({ children }) {
   }, []);
   return children;
 }
+export const api = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL
+})
 
 function App() {
   return (

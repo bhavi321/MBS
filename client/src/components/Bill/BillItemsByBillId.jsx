@@ -15,7 +15,7 @@ export default function BillItemsByBillId() {
         },
       })
       .then((response) => {
-        console.log(response.data.data);
+
         setBillItems(response.data.data);
       })
       .catch((error) => console.log(error.response.data));

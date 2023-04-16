@@ -18,7 +18,6 @@ function UpdateProducts() {
     const { name, value } = e.target;
 
     setDetails((prev) => {
-      console.log(prev);
       return { ...prev, [name]: value };
     });
   }
@@ -34,7 +33,6 @@ function UpdateProducts() {
       })
       .then((response) => {
         setUpdatedProduct(response.data.data)
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error.response.data);

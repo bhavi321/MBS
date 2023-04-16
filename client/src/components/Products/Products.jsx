@@ -15,15 +15,13 @@ function Products() {
     const { name, value } = e.target;
 
     setDetails((prev) => {
-      console.log(prev);
+
       return { ...prev, [name]: value };
     });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(details);
-    console.log(localStorage.getItem("auth-token"));
     api
       .post("/productss", details, {
         headers: {

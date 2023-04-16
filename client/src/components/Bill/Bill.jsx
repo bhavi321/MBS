@@ -32,7 +32,7 @@ function Bill() {
     setItems([...items]);
   }
   function handleSubmit() {
-    console.log(items);
+  
     api
       .post(
         "bill/",

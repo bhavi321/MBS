@@ -14,7 +14,7 @@ function FetchBill() {
         },
       })
       .then((response) => {
-        console.log(response.data.data);
+       
         setBills(response.data.data);
       })
       .catch((error) => console.log(error.response.data));

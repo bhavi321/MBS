@@ -41,7 +41,6 @@ export default function AuthContextProvider({ children }) {
     logOut,
   };
 
-  console.log(value);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -10,7 +10,6 @@ const userJoi = Joi.object({
     .message(
       "Password must include min 8 letters and at least: 1 special character,1 number. "
     ),
-  type: Joi.string().required().valid("ADMIN", "VENDOR"),
 });
 
 const loginJoi = Joi.object({

@@ -8,9 +8,6 @@ const { userJoi, loginJoi } = require("../middlewares/joiValidation");
 const register = async function (req, res) {
   const body = req.body;
 
-  if (!body || Object.keys(body).length == 0)
-    return res.status(400).json({ message: "Enter data in body." });
-
   if (body.email) body.email = body.email.trim();
   if (body.userName) body.userName = body.userName.trim();
 
@@ -31,7 +28,8 @@ const register = async function (req, res) {
 const login = async function (req, res) {
   const { email, password } = req.body;
   if (!email) return res.status(400).json({ message: "email is required" });
-  if (!password) return res.status(400).json({ message: "password is required" });
+  if (!password)
+    return res.status(400).json({ message: "password is required" });
   const { error } = loginJoi.validate(req.body, { abortEarly: false });
   if (error) return res.status(400).json({ error });
 
@@ -49,17 +47,17 @@ const login = async function (req, res) {
   } else {
     return res.status(400).json({ message: "enter valid password" });
   }
-};  
-const getUsers = async function(req,res){
-  const user = await userModel.find().select({_id:1,userName:1})
-  if(!user) return res.status(400).json({ message: "no user found" });
+};
+const getUsers = async function (req, res) {
+  const user = await userModel.find().select({ _id: 1, userName: 1 });
+  if (!user) return res.status(400).json({ message: "no user found" });
   return res.status(200).json({ message: "success", data: user });
-}
+};
 
 const getUserById = async function (req, res) {
   const userId = req.params.userId;
 
-  if(!userId) return res.status(400).json({ message: "user Id is required" });
+  if (!userId) return res.status(400).json({ message: "user Id is required" });
 
   if (!mongoose.isValidObjectId(userId))
     return res.status(400).json({ message: "Invalid User Id" });
@@ -81,4 +79,4 @@ const getUserById = async function (req, res) {
   }
 };
 
-module.exports = { register, login, getUserById,getUsers };
+module.exports = { register, login, getUserById, getUsers };

@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start": "node server/src/index.js",
-    "dev": "npx nodemon server/src/index.js"
+    "dev": "npx nodemon server/src/index.js",
+    "client": "cd client && npm start",
+    "postinstall": "cd client && npm install"
   },
   "repository": {
     "type": "git",

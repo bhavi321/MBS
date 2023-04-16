@@ -1,29 +1,13 @@
 import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-const {  isLoggedIn } = useContext(AuthContext);
+import { useAuth, useIsLoggedIn } from "../../contexts/AuthContextProvider";
 
-export const checkUser = () => {
-  let user = localStorage.getItem("auth-token");
-
-  if (user) {
-    return true;
-  } else {
-    return false;
-  }
-};
 export default function Headers() {
   const [show, setShow] = useState(false);
 
-  //let isLoggedIn = checkUser();
+  const { isLoggedIn, logOut } = useAuth();
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("auth-token")) {
-  //     setShow(true);
-  //   } else {
-  //     setShow(false);
-  //   }
-  // }, [show]);
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -54,7 +38,7 @@ export default function Headers() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              {isLoggedIn ? (
+              {isLoggedIn && (
                 <Fragment>
                   <li className="nav-item dropdown">
                     <a
@@ -106,31 +90,35 @@ export default function Headers() {
                         </Link>
                       </li>
                     </ul>
-                  </li>{" "}
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="me-5 nav-link"
+                      to={"/login"}
+                      onClick={logOut}
+                    >
+                      Logout
+                    </Link>
+                  </li>
                 </Fragment>
-              ) : (
-                <span></span>
               )}
 
-              <li className="nav-item">
-                <Link className="nav-link" to={"/login"}>
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to={"/register"}>
-                  Register
-                </Link>
-              </li>
+              {!isLoggedIn && (
+                <Fragment>
+                  <li className="nav-item">
+                    <Link className="nav-link" to={"/login"}>
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to={"/register"}>
+                      Register
+                    </Link>
+                  </li>
+                </Fragment>
+              )}
             </ul>
           </div>
-          <Link
-            className="me-5 nav-link"
-            to={"/login"}
-            onClick={() => localStorage.clear()}
-          >
-            Logout
-          </Link>
         </div>
       </nav>
     </div>

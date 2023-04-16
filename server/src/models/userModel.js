@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema(
     },
     type: {
       type: String,
+      default: "VENDOR",
     },
-
     isDeleted: {
       type: Boolean,
       default: false,

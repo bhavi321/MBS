@@ -1,28 +1,19 @@
 import axios from "axios";
-import {
-  Fragment,
-  React,
-  useEffect,
-  useContext,
-  createContext,
-  useState,
-} from "react";
-import "./App.css";
+import { React, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import "./App.css";
+import Bill from "./components/Bill/Bill";
+import BillItemsByBillId from "./components/Bill/BillItemsByBillId";
+import FetchBill from "./components/Bill/FetchBill";
+import Headers from "./components/Headers/Headers";
+import Homepage from "./components/Homepage/Homepage";
 import Login from "./components/Login/Login";
+import FetchProducts from "./components/Products/FetchProducts";
+import Products from "./components/Products/Products";
+import UpdateProducts from "./components/Products/UpdateProducts";
 import Register from "./components/User/Register";
 import User from "./components/User/User";
-import Bill from "./components/Bill/Bill";
-import FetchBill from "./components/Bill/FetchBill";
-import BillItemsByBillId from "./components/Bill/BillItemsByBillId";
-import Products from "./components/Products/Products";
-import FetchProducts from "./components/Products/FetchProducts";
-import UpdateProducts from "./components/Products/UpdateProducts";
-import Homepage from "./components/Homepage/Homepage";
-import Headers from "./components/Headers/Headers";
-
-export const AuthContext = React.createContext({});
-
+import AuthContextProvider from "./contexts/AuthContextProvider";
 
 function AR({ children }) {
   //authenticated routes
@@ -38,10 +29,7 @@ export const api = axios.create({
 
 function App() {
   return (
-    <Fragment>
-      <AuthContext.Provider
-        value={{ user, isLoggedIn: Boolean(user) }}
-      ></AuthContext.Provider>
+    <AuthContextProvider>
       <Headers />
       <div>
         <Routes>
@@ -114,7 +102,7 @@ function App() {
           />
         </Routes>
       </div>
-    </Fragment>
+    </AuthContextProvider>
   );
 }
 

@@ -1,5 +1,12 @@
 import axios from "axios";
-import { Fragment, React, useEffect } from "react";
+import {
+  Fragment,
+  React,
+  useEffect,
+  useContext,
+  createContext,
+  useState,
+} from "react";
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./components/Login/Login";
@@ -14,6 +21,9 @@ import UpdateProducts from "./components/Products/UpdateProducts";
 import Homepage from "./components/Homepage/Homepage";
 import Headers from "./components/Headers/Headers";
 
+export const AuthContext = React.createContext({});
+
+
 function AR({ children }) {
   //authenticated routes
   const navigate = useNavigate();
@@ -23,12 +33,15 @@ function AR({ children }) {
   return children;
 }
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL
-})
+  baseURL: process.env.REACT_APP_BASE_URL,
+});
 
 function App() {
   return (
     <Fragment>
+      <AuthContext.Provider
+        value={{ user, isLoggedIn: Boolean(user) }}
+      ></AuthContext.Provider>
       <Headers />
       <div>
         <Routes>
@@ -89,7 +102,7 @@ function App() {
               </AR>
             }
           />
-        
+
           <Route
             path="/products/update/:id"
             element={

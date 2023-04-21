@@ -10,6 +10,7 @@ const {
 const {
   createProduct,
   getProducts,
+  getProductByProductId,
   updateProducts,
   deleteProduct
 } = require("../controllers/productController");
@@ -31,6 +32,7 @@ router.get("/api/user/:userId", authentication, getUserById);
 
 router.post("/api/productss", authentication, createProduct);
 router.get("/api/products", authentication, getProducts);
+router.get("/api/products/id/:productId", authentication, getProductByProductId);
 router.put("/api/products/update/:productId", authentication, updateProducts);
 router.put("/api/products/delete/:productId", authentication, deleteProduct);
 //delete

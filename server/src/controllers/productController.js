@@ -67,6 +67,48 @@ const getProducts = async function (req, res) {
   }
 };
 
+const getProductByProductId = async function (req, res) {
+  const body = req.body;
+  const productId = req.params.productId;
+
+  if (!mongoose.isValidObjectId(productId))
+    return res.status(400).json({ message: "Invalid product Id" });
+
+
+  const product = await productModel.findOne({
+    _id: productId,
+    isDeleted: false,
+  });
+  if (!product)
+    return res
+      .status(404)
+      .json({ message: "product does not exist with this id" });
+
+  const user = await userModel.findOne({
+    _id: req.decodedToken.userId,
+    isDeleted: false,
+  });
+  if (!user) return res.status(404).json({ message: "no user found" });
+
+  if (user.type == "ADMIN") {
+    const getProduct = await productModel.findOne(
+      { _id: productId },
+    );
+    return res.status(200).json({ message: "success", data: getProduct });
+  } else if (user.type == "VENDOR") {
+    if (user._id.toString() != product.userId.toString())
+      return res.status(400).json({ message: "you are not authorized" });
+
+    const getProduct = await productModel.findOne(
+      { _id: productId }
+    );
+    return res.status(200).json({ message: "success", data: getProduct });
+  }
+};
+
+
+
+
 const updateProducts = async function (req, res) {
   const body = req.body;
   const productId = req.params.productId;
@@ -158,4 +200,4 @@ const updateProducts = async function (req, res) {
   }
 }
 
-module.exports = { createProduct, getProducts, updateProducts, deleteProduct };
+module.exports = { createProduct, getProducts,getProductByProductId, updateProducts, deleteProduct };

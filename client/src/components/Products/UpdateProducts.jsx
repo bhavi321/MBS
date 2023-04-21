@@ -1,19 +1,33 @@
 import { Fragment, React } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { api } from "../../App";
 
 function UpdateProducts() {
   const [error, setError] = useState("");
-  const [updatedProduct,setUpdatedProduct] = useState({})
+  const [updatedProduct, setUpdatedProduct] = useState({});
   const [details, setDetails] = useState({
     productName: "",
     unit: "",
-    price: ""
+    price: "",
   });
   const params = useParams();
-
+  console.log(details);
+  useEffect(() => {
+    api
+      .get(`/products/id/${params.id}`, {
+        headers: {
+          Authorization: localStorage.getItem("auth-token"),
+        },
+      })
+      .then((res) => {
+        setDetails(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  }, []);
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -24,15 +38,19 @@ function UpdateProducts() {
 
   function handleSubmit(e) {
     e.preventDefault();
- 
+    const { productName, unit, price } = details;
     api
-      .put(`/products/update/${params.id}`, details, {
-        headers: {
-          Authorization: localStorage.getItem("auth-token"),
-        },
-      })
+      .put(
+        `/products/update/${params.id}`,
+        { productName, unit, price },
+        {
+          headers: {
+            Authorization: localStorage.getItem("auth-token"),
+          },
+        }
+      )
       .then((response) => {
-        setUpdatedProduct(response.data.data)
+        setUpdatedProduct(response.data.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -43,7 +61,7 @@ function UpdateProducts() {
   return (
     <Fragment>
       <div className="">
-        <div className="container col-lg-3 col-5 shadow p-4 rounded mt-5 updateForm" >
+        <div className="container col-lg-3 col-5 shadow p-4 rounded mt-5 updateForm">
           <h1 className="">UPDATE PRODUCT</h1>
           <hr className="" />
           {error && <p className="alert alert-danger">{error}</p>}
@@ -57,6 +75,7 @@ function UpdateProducts() {
                 className="form-control"
                 id="userName"
                 name="productName"
+                value={details.productName}
                 onChange={handleChange}
               />
             </div>
@@ -69,6 +88,7 @@ function UpdateProducts() {
                 className="form-control"
                 id="unit"
                 name="unit"
+                value={details.unit}
                 onChange={handleChange}
               />
             </div>
@@ -81,6 +101,7 @@ function UpdateProducts() {
                 className="form-control"
                 id="price"
                 name="price"
+                value={details.price}
                 onChange={handleChange}
               />
             </div>
@@ -93,23 +114,24 @@ function UpdateProducts() {
           </form>
         </div>
         <hr />
-{Object.keys(updatedProduct).length!=0?  <div
-              className="card mx-auto col-lg-4 col-sm-10 mt-3 col-md-5 shadow"
-              style={{ width: "18rem" }}
-            >
-              <div className="card-body">
-                <h5 className="card-title">{updatedProduct.productName}</h5>
-                <h6 className="mb-2 text-body-primary">
-                  unit: {updatedProduct.unit}
-                </h6>
-                <h6 className=" mb-2 text-body-primary">
-                  price: {updatedProduct.price}
-                </h6>
-
-                
-              </div>
-            </div>:<div></div>}
-        
+        {Object.keys(updatedProduct).length != 0 ? (
+          <div
+            className="card mx-auto col-lg-4 col-sm-10 mt-3 col-md-5 shadow"
+            style={{ width: "18rem" }}
+          >
+            <div className="card-body">
+              <h5 className="card-title">{updatedProduct.productName}</h5>
+              <h6 className="mb-2 text-body-primary">
+                unit: {updatedProduct.unit}
+              </h6>
+              <h6 className=" mb-2 text-body-primary">
+                price: {updatedProduct.price}
+              </h6>
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </Fragment>
   );

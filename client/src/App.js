@@ -92,6 +92,7 @@ function App() {
               </AR>
             }
           />
+         
 
           <Route
             path="/products/update/:id"

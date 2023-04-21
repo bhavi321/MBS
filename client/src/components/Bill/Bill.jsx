@@ -3,6 +3,7 @@ import { React, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { api } from "../../App";
+import "./Bill.css"
 
 function Bill() {
   const [products, setProducts] = useState([]);
@@ -51,10 +52,11 @@ function Bill() {
   }
 
   return (
-    <div className="container">
-      <div className="input-group mt-3">
-        <span className="input-group-text" id="basic-addon1">
-          Customer Name
+    <div className="container billContainer" >
+      <div className="input-group mt-3 p-3" >
+       
+        <span className="input-group-text" style={{backgroundColor:"rgb(197, 188, 188)"}} id="basic-addon1">
+          <strong>Customer Name</strong>
         </span>
         <input
           type="text"
@@ -68,8 +70,9 @@ function Bill() {
         />
       </div>
       <div className="input-group mt-3">
-        <span className="input-group-text" id="basic-addon1">
-          Phone
+        <span className="input-group-text ms-3" 
+        style={{backgroundColor:"rgb(197, 188, 188)"}} id="basic-addon1">
+         <strong> Phone</strong>
         </span>
         <input
           type="text"
@@ -87,22 +90,24 @@ function Bill() {
       <div className={"row"}>
         <div className="mx-auto col mt-4">
           {new Array(numberOfElements).fill(0).map((x, index) => (
-            <div className="border p-4 mt-4 rounded">
+            <div className="border border-3 p-4 mt-4 rounded">
               <select
                 name="productId"
                 className="form-select"
+                style={{backgroundColor:"rgb(197, 188, 188)"}} 
                 aria-label="Default select example"
                 onChange={(e) => handleChange(e, index)}
               >
-                <option selected>Choose</option>
+                <option selected><strong>Choose</strong></option>
                 {products.map((p) => {
                   return <option value={p._id}>{p.productName}</option>;
                 })}
               </select>
 
               <div className="input-group mt-3">
-                <span className="input-group-text" id="basic-addon1">
-                  Quantity
+                <span className="input-group-text"
+                style={{backgroundColor:"rgb(197, 188, 188)"}}  id="basic-addon1">
+                 <strong>Quantity</strong>
                 </span>
                 <input
                   type="text"

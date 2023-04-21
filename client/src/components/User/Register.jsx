@@ -3,6 +3,7 @@ import "./Register.css";
 import { useState } from "react";
 import axios from "axios";
 import { api } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [error, setError] = useState("");
@@ -11,6 +12,7 @@ function Register() {
     email: "",
     password: "",
   });
+  const navigate= useNavigate()
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -24,10 +26,12 @@ function Register() {
     api
       .post("/register", details)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response.data);
+        navigate("/login")
       })
       .catch((error) => {
-        setError(error.response.data.error.details[0].message);
+        console.log(error.response.data)
+        setError(error.response.data.message);
       });
   }
   return (

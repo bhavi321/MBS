@@ -26,8 +26,8 @@ function FetchBill() {
         return (
          
             <div
-              className="card mx-auto col-lg-4 col-sm-10 mt-3 col-md-5 shadow"
-              style={{ width: "18rem" }}
+              className="card mx-auto col-lg-4 col-sm-10 mt-3 col-md-5 shadow fetchCard"
+              style={{ width: "17rem" }}
             >
               <div className="card-body">
                 <h5 className="card-title">{x.customerName}</h5>

@@ -26,7 +26,7 @@ function UpdateProducts() {
     e.preventDefault();
  
     api
-      .put(`/products/${params.id}`, details, {
+      .put(`/products/update/${params.id}`, details, {
         headers: {
           Authorization: localStorage.getItem("auth-token"),
         },
@@ -38,11 +38,12 @@ function UpdateProducts() {
         console.log(error.response.data);
       });
     //error.response.data.error.details
+    //backgroundColor:"rgb(252, 171, 171)
   }
   return (
     <Fragment>
       <div className="">
-        <div className="container col-lg-3 col-5 shadow p-4 rounded">
+        <div className="container col-lg-3 col-5 shadow p-4 rounded mt-5 updateForm" >
           <h1 className="">UPDATE PRODUCT</h1>
           <hr className="" />
           {error && <p className="alert alert-danger">{error}</p>}

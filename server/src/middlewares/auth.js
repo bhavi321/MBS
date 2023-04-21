@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const authentication = async function (req, res, next) {
   let bearerToken = req.header("Authorization");
-
   if (!bearerToken)
     return res
       .status(400)

@@ -11,6 +11,7 @@ const {
   createProduct,
   getProducts,
   updateProducts,
+  deleteProduct
 } = require("../controllers/productController");
 const {
   createBill,
@@ -30,7 +31,8 @@ router.get("/api/user/:userId", authentication, getUserById);
 
 router.post("/api/productss", authentication, createProduct);
 router.get("/api/products", authentication, getProducts);
-router.put("/api/products/:productId", authentication, updateProducts);
+router.put("/api/products/update/:productId", authentication, updateProducts);
+router.put("/api/products/delete/:productId", authentication, deleteProduct);
 //delete
 
 router.post("/api/bill", authentication, createBill);

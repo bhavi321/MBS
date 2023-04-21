@@ -11,6 +11,7 @@ import Login from "./components/Login/Login";
 import FetchProducts from "./components/Products/FetchProducts";
 import Products from "./components/Products/Products";
 import UpdateProducts from "./components/Products/UpdateProducts";
+import DeleteProduct from "./components/Products/DeleteProduct";
 import Register from "./components/User/Register";
 import User from "./components/User/User";
 import AuthContextProvider from "./contexts/AuthContextProvider";
@@ -30,8 +31,9 @@ export const api = axios.create({
 function App() {
   return (
     <AuthContextProvider>
+      <div class="body">
       <Headers />
-      <div>
+      
         <Routes>
           <Route path="" element={<Login />} />
           <Route path="/login" element={<Login />} />
@@ -97,6 +99,15 @@ function App() {
               <AR>
                 {" "}
                 <UpdateProducts />
+              </AR>
+            }
+          />
+          <Route
+            path="/products/delete/:id"
+            element={
+              <AR>
+                {" "}
+                <DeleteProduct />
               </AR>
             }
           />

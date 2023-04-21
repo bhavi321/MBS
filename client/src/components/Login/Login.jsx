@@ -39,7 +39,7 @@ const Login = function () {
 
   return (
     <div className="container">
-      <div className="col-lg-6 mt-4 mx-auto shadow p-4">
+      <div className="col-lg-6 mt-4 mx-auto shadow p-4 incontainer" style={{backgroundColor:"rgb(252, 171, 171)"}}>
         <h1 className="heading ms-5">Login Here</h1>
 
         <hr />

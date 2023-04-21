@@ -2,15 +2,15 @@ import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth, useIsLoggedIn } from "../../contexts/AuthContextProvider";
-
+import "./headers.css"
 export default function Headers() {
   const [show, setShow] = useState(false);
 
   const { isLoggedIn, logOut } = useAuth();
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="navbar">
+      <nav className="navbar navbar-expand-lg bg-success">
         <div className="container-fluid">
           <div>
             <a className="navbar-brand" href="">
@@ -19,9 +19,9 @@ export default function Headers() {
                 alt="Logo"
                 width="38"
                 height="39"
-                className="d-inline-block align-text-center "
+                className="d-inline-block align-text-center rounded-5"
               />
-              My Invoice
+              &nbsp;&nbsp;&nbsp;<strong>My Invoice</strong>
             </a>
           </div>
 

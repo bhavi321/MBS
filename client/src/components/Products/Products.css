@@ -1,0 +1,10 @@
+.updateForm{
+    border: 1px solid;
+    background-image: linear-gradient(to right,#efc6a4,#fefcfb); 
+}
+.fetchCard{
+    background-image: linear-gradient(to right,#efd1b8,#fefcfb);  
+}
+.createForm{
+    background-image: linear-gradient(to right,#FCABAB,#fefcfb);  
+}

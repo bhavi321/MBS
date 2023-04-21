@@ -80,3 +80,4 @@ const getUserById = async function (req, res) {
 };
 
 module.exports = { register, login, getUserById, getUsers };
+

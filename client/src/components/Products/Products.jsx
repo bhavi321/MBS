@@ -2,9 +2,11 @@ import { Fragment, React } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { api } from "../../App";
+import "./Products.css"
 
 function Products() {
   const [error, setError] = useState("");
+  const [createdProduct,setCreatedProduct] = useState({})
   const [details, setDetails] = useState({
     productName: "",
     unit: "",
@@ -30,6 +32,7 @@ function Products() {
       })
       .then((response) => {
         console.log(response.data);
+        setCreatedProduct(response.data.data)
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -39,7 +42,7 @@ function Products() {
   return (
     <Fragment>
       <div className="">
-        <div className="container col-lg-3 col-5 shadow p-4 rounded">
+        <div className="container col-lg-3 col-5 shadow p-4 rounded mt-4 createForm"  >
           <h1 className="">CREATE PRODUCT</h1>
           <hr className="" />
           {error && <p className="alert alert-danger">{error}</p>}
@@ -88,6 +91,27 @@ function Products() {
             ></input>
           </form>
         </div>
+
+        {Object.keys(createdProduct).length!=0?  <div
+              className="card mx-auto col-lg-4 col-sm-10 mt-3 col-md-5 shadow"
+              style={{ width: "20rem" }}
+            >
+              <div className="card-body">
+                <h5 className="card-title">{}</h5>
+                <h6 className="mb-2 text-body-primary">
+                  Product Name: {createdProduct.productName}
+                </h6>
+                <h6 className="mb-2 text-body-primary">
+                  unit: {createdProduct.unit}
+                </h6>
+                <h6 className=" mb-2 text-body-primary">
+                  price: {createdProduct.price}
+                </h6>
+
+                
+              </div>
+            </div>:<div></div>}
+        
       </div>
     </Fragment>
   );

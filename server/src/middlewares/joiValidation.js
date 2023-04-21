@@ -34,7 +34,9 @@ const createBillValidation = Joi.object({
   phone: Joi.string()
     .min(0)
     .required()
-    .regex(/^[6-9][0-9]{9}$/),
+    .regex(/^[6-9][0-9]{9}$/).message(
+      "Phone Number must be valid"
+    ),
   items: Joi.array()
     .items(
       Joi.object({

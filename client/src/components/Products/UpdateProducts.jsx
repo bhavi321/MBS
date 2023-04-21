@@ -25,7 +25,7 @@ function UpdateProducts() {
         setDetails(res.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        setError(error.response.data.message);
       });
   }, []);
   function handleChange(e) {
@@ -53,7 +53,7 @@ function UpdateProducts() {
         setUpdatedProduct(response.data.data);
       })
       .catch((error) => {
-        console.log(error.response.data);
+        setError(error.response.data.message);
       });
     //error.response.data.error.details
     //backgroundColor:"rgb(252, 171, 171)

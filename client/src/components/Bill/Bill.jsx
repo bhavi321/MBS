@@ -3,7 +3,8 @@ import { React, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { api } from "../../App";
-import "./Bill.css"
+import "./Bill.css";
+
 
 function Bill() {
   const [products, setProducts] = useState([]);
@@ -14,6 +15,8 @@ function Bill() {
   const [phone, setPhone] = useState("");
   const [billItems, setBillItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const[error,setError] = useState("")
+ 
 
   useEffect(() => {
     api
@@ -23,7 +26,7 @@ function Bill() {
       .then((response) => {
         setProducts(response.data.data);
       })
-      .catch((error) => console.log(error.response.data));
+      .catch((error) => setError(error.response.data.message));
   }, []);
 
   function handleChange({ target: { value, name } }, index) {
@@ -33,7 +36,6 @@ function Bill() {
     setItems([...items]);
   }
   function handleSubmit() {
-  
     api
       .post(
         "bill/",
@@ -48,14 +50,20 @@ function Bill() {
         setBillItems(res.data.data.items);
         setTotalPrice(res.data.data.bill.totalPrice);
       })
-      .catch((error) => console.log(error.response.data));
+      .catch((error) => {console.log(error.response)
+        setError(error.response.data.message)});
   }
 
   return (
-    <div className="container billContainer" >
-      <div className="input-group mt-3 p-3" >
-       
-        <span className="input-group-text" style={{backgroundColor:"rgb(197, 188, 188)"}} id="basic-addon1">
+    <div className="container billContainer">
+      {error && <p className="alert alert-danger">{error}</p>}
+      <div className="input-group mt-3 p-3">
+      
+        <span
+          className="input-group-text"
+          style={{ backgroundColor: "rgb(197, 188, 188)" }}
+          id="basic-addon1"
+        >
           <strong>Customer Name</strong>
         </span>
         <input
@@ -70,9 +78,12 @@ function Bill() {
         />
       </div>
       <div className="input-group mt-3">
-        <span className="input-group-text ms-3" 
-        style={{backgroundColor:"rgb(197, 188, 188)"}} id="basic-addon1">
-         <strong> Phone</strong>
+        <span
+          className="input-group-text ms-3"
+          style={{ backgroundColor: "rgb(197, 188, 188)" }}
+          id="basic-addon1"
+        >
+          <strong> Phone</strong>
         </span>
         <input
           type="text"
@@ -94,20 +105,25 @@ function Bill() {
               <select
                 name="productId"
                 className="form-select"
-                style={{backgroundColor:"rgb(197, 188, 188)"}} 
+                style={{ backgroundColor: "rgb(197, 188, 188)" }}
                 aria-label="Default select example"
                 onChange={(e) => handleChange(e, index)}
               >
-                <option selected><strong>Choose</strong></option>
+                <option selected>
+                  <strong>Choose</strong>
+                </option>
                 {products.map((p) => {
                   return <option value={p._id}>{p.productName}</option>;
                 })}
               </select>
 
               <div className="input-group mt-3">
-                <span className="input-group-text"
-                style={{backgroundColor:"rgb(197, 188, 188)"}}  id="basic-addon1">
-                 <strong>Quantity</strong>
+                <span
+                  className="input-group-text"
+                  style={{ backgroundColor: "rgb(197, 188, 188)" }}
+                  id="basic-addon1"
+                >
+                  <strong>Quantity</strong>
                 </span>
                 <input
                   type="text"
@@ -142,9 +158,11 @@ function Bill() {
 
         {/* <div className="col">{JSON.stringify(items)}</div> */}
       </div>
+
+     
       <hr />
       {billItems.length >= 1 ? (
-        <div>
+        <div >
           <pre class="fs-4 border">
             Customer Name: {customerName}
             <br />

@@ -5,10 +5,7 @@ const billModel = require("../models/billModel");
 const productModel = require("../models/productModel");
 const userModel = require("../models/userModel");
 const createBill = async function (req, res) {
-  // createbillObject using seller id(token) custer name and phone
 
-  //you will ger the bill id from newlycreated object
-  //you will create bill item object using item id and qauantity from array
   if (!req.body || Object.keys(req.body).length == 0)
     return res
       .status(400)
@@ -29,7 +26,7 @@ const createBill = async function (req, res) {
     abortEarly: false,
   });
 
-  if (error) return res.status(400).json({ error });
+  if (error) return res.status(400).json({ message:error.details[0].message });
 
   const user = await userModel.findOne({
     _id: req.decodedToken.userId,
@@ -220,18 +217,3 @@ module.exports = {
   getBillItemsByBillId,
 };
 
-// let obj = {
-//     items: [{itemsId,quantity},],
-//
-//     costumerName,
-//     phone
-// }
-// {
-//     customerName: 'x',
-//     userId: new ObjectId("642c8441c4fcf092515e4516"),
-//     phone: 2345667654,
-//     _id: new ObjectId("642dbdcf9a256e07eecd219e"),
-//     createdAt: 2023-04-05T18:28:31.842Z,
-//     updatedAt: 2023-04-05T18:28:31.842Z,
-//     __v: 0
-//   }

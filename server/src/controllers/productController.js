@@ -12,7 +12,7 @@ const createProduct = async function (req, res) {
   if (body.productName) body.productName = body.productName.trim();
 
   const { error, value } = productJoi.validate(body, { abortEarly: false });
-  if (error) return res.status(400).json({ error });
+  if (error) return res.status(400).json({ message:error.details[0].message });
 
   let user = await userModel.findOne({
     _id: req.decodedToken.userId,
@@ -119,7 +119,7 @@ const updateProducts = async function (req, res) {
   const { error, value } = productUpdateJoi.validate(body, {
     abortEarly: false,
   });
-  if (error) return res.status(400).json({ error });
+  if (error) return res.status(400).json({message:error.details[0].message });
 
   const product = await productModel.findOne({
     _id: productId,

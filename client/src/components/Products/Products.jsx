@@ -35,7 +35,7 @@ function Products() {
         setCreatedProduct(response.data.data)
       })
       .catch((error) => {
-        console.log(error.response.data);
+        setError(error.response.data.message);
       });
     //error.response.data.error.details
   }

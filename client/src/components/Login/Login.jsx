@@ -78,7 +78,7 @@ const Login = function () {
             <div className="mt-4">
               <button
                 type="submit"
-                className="btn btn-success"
+                className="btn btn-success button"
                 onClick={handleSubmit}
               >
                 SUBMIT

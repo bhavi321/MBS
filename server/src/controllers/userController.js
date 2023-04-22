@@ -15,7 +15,7 @@ const register = async function (req, res) {
   if (user) return res.status(400).json({ message: "email already present" });
 
   const { error, value } = userJoi.validate(body, { abortEarly: false });
-  if (error) return res.status(400).json({ error });
+  if (error) return res.status(400).json({ message:error.details[0].message.replaceAll('"','') });
 
   const hashedPassword = bcrypt.hashSync(body.password, 10);
   body.password = hashedPassword;

@@ -26,7 +26,7 @@ const createBill = async function (req, res) {
     abortEarly: false,
   });
 
-  if (error) return res.status(400).json({ message:error.details[0].message });
+  if (error) return res.status(400).json({ message:error.details[0].message.replaceAll('"','') });
 
   const user = await userModel.findOne({
     _id: req.decodedToken.userId,

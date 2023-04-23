@@ -162,7 +162,7 @@ function Bill() {
      
       <hr />
 
-                <button onClick={()=>window.print()}>print</button>
+                <button className = "btn btn-dark text"onClick={()=>window.print()}> <strong>Print</strong> </button>
       <hr />
       {billItems.length >= 1 ? (
         <div className="print" >

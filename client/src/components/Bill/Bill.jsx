@@ -161,8 +161,11 @@ function Bill() {
 
      
       <hr />
+
+                <button onClick={()=>window.print()}>print</button>
+      <hr />
       {billItems.length >= 1 ? (
-        <div >
+        <div className="print" >
           <pre class="fs-4 border">
             Customer Name: {customerName}
             <br />

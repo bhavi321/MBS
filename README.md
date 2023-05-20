@@ -236,7 +236,7 @@ Step2: npm start
 
 ### Create Bill(After login)
 
-![App Screenshot]()
+![App Screenshot](https://github.com/bhavi321/Multivendor-Billing-System/blob/main/screenshots/Create%20Bill.png?raw=true)
 
 ### Fetch Bills
 

@@ -1,8 +1,12 @@
 # Multivendor-Billing-System
 
 ```yaml
-Multivendor Billing System  is fully Responsive MERN App with Authentication,authorization,
-into his/her friend list and He/She can upload a post .
+-Multivendor Billing System  is fully Responsive MERN App
+-Each vendor can create, fetch, update as well as delete their own products. 
+-Based on their own products, vendor can create as well as fetch their own bills.
+-Implemented download bill functionality.
+-Implemented Authentication and Authorization with encrypted password.
+-Admin can fetch anyone's details.
 ```
 
 To Start Backend Server
@@ -83,6 +87,50 @@ Step2: npm start
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+  },
+  { timestamps: true }
+```
+- Bill Model
+
+```yaml
+ {
+    customerName: {
+      type: String,
+    },
+    userId: {
+      type: ObjectId,
+      ref: "user",
+    },
+    phone: {
+      type: String,
+    },
+    totalPrice: {
+      type: Number,
+    },
+  },
+  { timestamps: true }
+```
+
+- BillItem Model
+
+```yaml
+   {
+    billId: {
+      type: ObjectId,
+      ref: "bill",
+    },
+    productId: {
+      type: ObjectId,
+      ref: "product",
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    unitPrice: {
+      type: Number,
+      required: true,
     },
   },
   { timestamps: true }

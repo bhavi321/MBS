@@ -228,11 +228,11 @@ Step2: npm start
 
 ### Register
 
-![App Screenshot]()
+![App Screenshot](https://github.com/bhavi321/Multivendor-Billing-System/blob/main/screenshots/Register.png?raw=true)
 
 ### Login
 
-![App Screenshot]()
+![App Screenshot](https://github.com/bhavi321/Multivendor-Billing-System/blob/main/screenshots/Login.png?raw=true)
 
 ### Create Bill(After login)
 
@@ -240,22 +240,22 @@ Step2: npm start
 
 ### Fetch Bills
 
-![App Screenshot]()
+![App Screenshot](https://github.com/bhavi321/Multivendor-Billing-System/blob/main/screenshots/Fetch%20Bills.png?raw=true)
 
 ### Download Bill
 
-![App Screenshot]()
+![App Screenshot](https://github.com/bhavi321/Multivendor-Billing-System/blob/main/screenshots/Download%20Bill.png?raw=true)
 
 
 ### Create Product
 
-![App Screenshot]()
+![App Screenshot](https://github.com/bhavi321/Multivendor-Billing-System/blob/main/screenshots/Create%20Product.png?raw=true)
 
 ### Fetch Products
 
-![App Screenshot]()
+![App Screenshot](https://github.com/bhavi321/Multivendor-Billing-System/blob/main/screenshots/Fetch%20Products.png?raw=true)
 
-### Update and Delete Product
+### Update Product
 
-![App Screenshot]()
+![App Screenshot](https://github.com/bhavi321/Multivendor-Billing-System/blob/main/screenshots/Update%20Product.png?raw=true)
 

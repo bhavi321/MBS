@@ -8,6 +8,19 @@
 -Implemented Authentication and Authorization with encrypted password.
 -Admin can fetch anyone's details.
 ```
+## Credentials for login
+
+
+- **Vendors:**
+  - _**email**_ - ratantata@gmail.com,
+   _**password**_ - Bills@123
+  - _**email**_ - elonmusk@gmail.com,
+   _**password**_ - Bills@123
+- **Admin:**
+  - _**email**_ - shahrukhkhan@gmail.com,
+   _**password**_ - Bills@123
+
+
 
 To Start Backend Server
 
